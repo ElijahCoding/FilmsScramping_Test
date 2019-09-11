@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Console\Services\Films\Contracts\FilmContract;
 
 class FetchFilms extends Command
 {
+    protected $filmContract;
+
     /**
      * The name and signature of the console command.
      *
@@ -25,9 +28,11 @@ class FetchFilms extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(FilmContract $filmContract)
     {
         parent::__construct();
+
+        $this->filmContract = $filmContract;
     }
 
     /**
@@ -37,6 +42,6 @@ class FetchFilms extends Command
      */
     public function handle()
     {
-        //
+        $this->filmContract->fetch();
     }
 }
