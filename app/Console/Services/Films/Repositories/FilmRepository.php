@@ -14,15 +14,27 @@ class FilmRepository implements FilmContract
 
     public function __construct(Client $client)
     {
-        $this->client = $client;
+        $this->client = $client->request('GET', $this->url);
     }
 
-    public function fetch()
+    public function fetchLink()
     {
-        $response = $this->client->request('GET', $this->url);
+        $this->client->filter('a[style*="text-decoration:none;display:block"]')->each(function ($node) {
+            return $node->extract('href');
+        });
+    }
 
-        $films = $response->filter('div.row > a')->each(function ($node) {
-            dump($node->filter('div.name-ru')->extract('_text'));
+    public function fetchName()
+    {
+        $this->client->filter('div.name-ru')->each(function ($node) {
+            return $node->extract('_text');
+        });
+    }
+
+    public function fetchDate()
+    {
+        $this->client->filter('div.alpha')->each(function ($node) {
+            return $node->extract('_text');
         });
     }
 }

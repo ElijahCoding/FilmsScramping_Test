@@ -4,5 +4,9 @@ namespace App\Console\Services\Films\Contracts;
 
 interface FilmContract
 {
-    public function fetch();
+    public function fetchLink();
+
+    public function fetchName();
+
+    public function fetchDate();
 }

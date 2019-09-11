@@ -42,6 +42,8 @@ class FetchFilms extends Command
      */
     public function handle()
     {
-        $this->filmContract->fetch();
+        // $this->filmContract->fetchLink();
+        // $this->filmContract->fetchName();
+        $this->filmContract->fetchDate();
     }
 }
