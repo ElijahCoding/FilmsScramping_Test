@@ -55,7 +55,7 @@ class FilmRepository implements FilmContract
 
     public function fetchDate()
     {
-         $data = $this->client->filter('div.details-pane > div.alpha')->each(function ($node) {
+         $data = $this->client->filter('div.details-pane > div.beta')->each(function ($node) {
             $date = preg_replace( '/[^0-9.]/i', '', $node->extract('_text')[0]);
             if (strlen($date) > 2) return $date;
          });
