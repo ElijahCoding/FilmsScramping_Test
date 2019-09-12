@@ -1904,11 +1904,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      films: []
+      films: [],
+      query: ''
     };
   },
   components: {
@@ -1925,6 +1931,19 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
         _this.films = data.data;
       });
+    }
+  },
+  computed: {
+    filteredFilms: function filteredFilms() {
+      var _this2 = this;
+
+      var data = this.films;
+      data = data.filter(function (row) {
+        return Object.keys(row).some(function (key) {
+          return String(row[key]).toLowerCase().indexOf(_this2.query.toLowerCase()) > -1;
+        });
+      });
+      return data;
     }
   }
 });
@@ -54867,11 +54886,33 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [_vm._v("Films")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.query,
+                  expression: "query"
+                }
+              ],
+              staticClass: "form-control py-2",
+              attrs: { type: "search", placeholder: "Search" },
+              domProps: { value: _vm.query },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.query = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
             _c(
               "ul",
               { staticClass: "list-group" },
-              _vm._l(_vm.films, function(film) {
-                return _vm.films.length
+              _vm._l(_vm.filteredFilms, function(film) {
+                return _vm.filteredFilms.length
                   ? _c("film", { key: film.id, attrs: { film: film } })
                   : _vm._e()
               }),

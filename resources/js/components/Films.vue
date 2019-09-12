@@ -6,9 +6,14 @@
                     <div class="card-header">Films</div>
 
                     <div class="card-body">
+                        <input class="form-control py-2"
+                               type="search"
+                               placeholder="Search"
+                               v-model="query"
+                           >
                         <ul class="list-group">
-                            <film v-if="films.length"
-                                  v-for="film in films"
+                            <film v-if="filteredFilms.length"
+                                  v-for="film in filteredFilms"
                                   :film="film"
                                   :key="film.id"
                                   />
@@ -26,7 +31,8 @@
     export default {
         data () {
             return {
-                films: []
+                films: [],
+                query: ''
             }
         },
 
@@ -43,6 +49,24 @@
                 axios.get('/api/films').then(({ data }) => {
                     this.films = data.data
                 })
+            }
+        },
+
+        computed: {
+            filteredFilms () {
+                let data = this.films;
+
+                data = data.filter(row => {
+                  return Object.keys(row).some(key => {
+                    return (
+                      String(row[key])
+                        .toLowerCase()
+                        .indexOf(this.query.toLowerCase()) > -1
+                    );
+                  });
+                });
+
+                return data;
             }
         }
     }
