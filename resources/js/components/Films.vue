@@ -3,10 +3,16 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">Films</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        <ul class="list-group">
+                            <film v-if="films.length"
+                                  v-for="film in films"
+                                  :film="film"
+                                  :key="film.id"
+                                  />
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -15,9 +21,29 @@
 </template>
 
 <script>
+    import Film from './Film';
+
     export default {
+        data () {
+            return {
+                films: []
+            }
+        },
+
+        components: {
+            Film
+        },
+
         mounted() {
-            console.log('Component mounted.')
+            this.fetchFilms()
+        },
+
+        methods: {
+            fetchFilms () {
+                axios.get('/api/films').then(({ data }) => {
+                    this.films = data.data
+                })
+            }
         }
     }
 </script>

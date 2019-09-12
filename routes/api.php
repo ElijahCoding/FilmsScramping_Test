@@ -1,3 +1,3 @@
 <?php
 
-Route::get('/', 'FilmController@index');
+Route::get('/films', 'FilmController@index');
