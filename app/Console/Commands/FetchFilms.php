@@ -42,8 +42,9 @@ class FetchFilms extends Command
      */
     public function handle()
     {
-        // $this->filmContract->fetchLink();
-        // $this->filmContract->fetchName();
-        $this->filmContract->fetchDate();
+        foreach ($this->filmContract->output() as $key => $data) {
+
+            dump($key, $data);
+        }
     }
 }
