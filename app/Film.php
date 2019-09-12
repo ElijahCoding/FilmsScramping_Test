@@ -2,9 +2,12 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Film extends Model
 {
     protected $guarded = [];
+
+    protected $dates = ['published_at'];
 }

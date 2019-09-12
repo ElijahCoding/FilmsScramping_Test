@@ -4,6 +4,7 @@ namespace App\Console\Services\Films\Repositories;
 
 use App\Film;
 use Goutte\Client;
+use Carbon\Carbon;
 use App\Console\Services\Films\Contracts\FilmContract;
 
 class FilmRepository implements FilmContract
@@ -32,7 +33,7 @@ class FilmRepository implements FilmContract
             $data[] = [
                 'name' => $this->fetchName()[$i],
                 'url' => $this->fetchLink()[$i],
-                'published_at' => $this->fetchDate()[$i]
+                'published_at' => Carbon::parse($this->fetchDate()[$i])->format('m-d-Y')
             ];
         }
 

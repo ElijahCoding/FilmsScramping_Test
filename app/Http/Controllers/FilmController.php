@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Film;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Resources\FilmResource;
 
 class FilmController extends Controller
 {
     public function index()
     {
-        // $films = Film::orderBy()->get();
-        // foreach (Film::get() as $film) {
-        //
-        // }
+        return FilmResource::collection(Film::orderBy('published_at', 'desc')->get());
     }
 }
