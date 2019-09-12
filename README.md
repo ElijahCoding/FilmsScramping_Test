@@ -18,3 +18,9 @@
 
 Решение предоставить в виде ссылки на github.com с инструкцией по развертыванию проекта “для чайников” и краткой инструкцией по использованию
 
+
+git clone git@github.com:ElijahCoding/FilmsScraping_Test.git
+cd FilmsScraping_Test
+composer install && npm install
+php artisan migrate && php artisan fetch:films
+npm run dev && php artisan serve
