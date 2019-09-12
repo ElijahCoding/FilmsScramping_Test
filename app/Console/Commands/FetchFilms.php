@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Film;
 use Illuminate\Console\Command;
 use App\Console\Services\Films\Contracts\FilmContract;
 
@@ -42,9 +43,6 @@ class FetchFilms extends Command
      */
     public function handle()
     {
-        foreach ($this->filmContract->output() as $key => $data) {
-
-            dump($key, $data);
-        }
+        $this->filmContract->DBCreate();
     }
 }

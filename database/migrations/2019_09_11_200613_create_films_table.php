@@ -17,7 +17,7 @@ class CreateFilmsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('url')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->string('published_at')->nullable();
             $table->timestamps();
         });
     }
